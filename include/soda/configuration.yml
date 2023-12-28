@@ -1,0 +1,15 @@
+data_source sales:
+  type: bigquery
+  connection:
+    account_info_json_path: /usr/local/airflow/include/gcp/service_account.json
+    auth_scopes:
+    - https://www.googleapis.com/auth/bigquery
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/drive
+    project_id: 'yalo-409412'
+    dataset: sales
+
+soda_cloud:
+  host: cloud.us.soda.io
+  api_key_id: 5e1911db-f6c4-4fe4-8d2b-46cba2ae5e3c
+  api_key_secret: aE5CHpJnt3X9kQFQ_8f7-rgcoooNyNuu6gCH7x7gaVTy1UnwdCL0pw

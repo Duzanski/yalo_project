@@ -1,8 +1,11 @@
 .git
 .env
+env_yalo/
+include/gcp
 .DS_Store # macOS specific ignore
 airflow_settings.yaml
 __pycache__/
+.env_yalo
 astro
 .venv
 airflow-webserver.pid

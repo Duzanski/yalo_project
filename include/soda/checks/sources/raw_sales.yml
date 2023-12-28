@@ -1,0 +1,29 @@
+checks for raw_sales:
+  - schema:
+      fail:
+        when required column missing: [invoice_and_item_number, date, store_number, store_name, address, city, zip_code, store_location, county_number, county, category, category_name, vendor_number, vendor_name, item_number, item_description, pack, bottle_volume_ml, state_bottle_cost, state_bottle_retail, bottles_sold, sale_dollars, volume_sold_liters, volume_sold_gallons]
+        when wrong column type:
+          invoice_and_item_number: string
+          date: date
+          store_number: string
+          store_name: string
+          address: string
+          city: string
+          zip_code: string
+          store_location: geography
+          county_number: string
+          county: string
+          category: string
+          category_name: string
+          vendor_number: string
+          vendor_name: string
+          item_number: string
+          item_description: string
+          pack: integer
+          bottle_volume_ml: integer
+          state_bottle_cost: float64
+          state_bottle_retail: float64
+          bottles_sold: integer
+          sale_dollars: float64
+          volume_sold_liters: float64
+          volume_sold_gallons: float64
