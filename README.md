@@ -52,8 +52,7 @@ Table of Contents
 ```
 
 ## Task_1
-* Calculate the total products and revenue sold over time by quarter and
-identify the month where the revenue sold was 10% above the average.
+### Calculate the total products and revenue sold over time by quarter and identify the month where the revenue sold was 10% above the average.
 ```sql
   WITH monthly_revenue AS (
   SELECT 
@@ -83,7 +82,7 @@ FROM monthly_revenue, average_revenue
 ORDER BY year, quarter, month
 ```
 
-* List the counties where the amount (in dollars) of purchases transactions went over $100K.
+### List the counties where the amount (in dollars) of purchases transactions went over $100K.
 ```sql
 SELECT county
 FROM `bigquery-public-data.iowa_liquor_sales.sales`
@@ -91,9 +90,7 @@ GROUP BY county
 HAVING SUM(sale_dollars) > 100000;
 ```
 
-* Identify the top 10 stores with more revenue in sold products and the bottom
-stores with least revenue in sold products (apply a deduplication logic in case
-it’s needed).
+### Identify the top 10 stores with more revenue in sold products and the bottom stores with least revenue in sold products (apply a deduplication logic in case it’s needed).
 ```sql
 -- Top 10 stores with the most revenue
 SELECT store_name, SUM(sale_dollars) as total_revenue
