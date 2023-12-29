@@ -1,0 +1,19 @@
+checks for dim_store:
+  - schema:
+      fail:
+        when required column missing: [store_id, store_number, store_name, address, city, zip_code, store_location, county_number, county]
+        when wrong column type:
+          store_id: string
+          store_number: integer
+          store_name: string
+          address: string
+          city: string
+          zip_code: integer
+          store_location: geography
+          county_number: integer
+          county: string
+
+  # Check fails when any NULL values exist in the column
+  - missing_count(store_id) = 0:
+      name: All store_id have a key
+  

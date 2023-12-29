@@ -4,6 +4,7 @@ WITH date_cte AS (
     date,
   FROM {{ source('sales', 'raw_sales') }}
   WHERE date IS NOT NULL
+  LIMIT 1000  
 )
 SELECT
   date_id,

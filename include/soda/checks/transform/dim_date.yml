@@ -1,0 +1,20 @@
+checks:
+  dim_date:
+    - schema:
+        fail:
+          when required column missing: [date_id, full_date, year, month, day, quarter]
+          when wrong column type:
+            date_id: string
+            full_date: date
+            year: integer
+            month: integer
+            day: integer
+            quarter: integer
+    - invalid_count(quarter) = 0:
+        name: All quarters are in the range 1-4
+        valid_min: 1
+        valid_max: 4
+    - duplicate_count(date_id) = 0:
+        name: All dates are unique
+    - missing_count(date_id) = 0:
+        name: All dates have a key

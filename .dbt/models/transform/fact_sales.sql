@@ -16,6 +16,7 @@ WITH fct_sales AS (
         volume_sold_liters,
         volume_sold_gallons
     FROM {{ source('sales', 'raw_sales') }}
+    LIMIT 1000
 )
 
 SELECT

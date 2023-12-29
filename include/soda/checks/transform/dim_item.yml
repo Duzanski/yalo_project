@@ -1,0 +1,15 @@
+checks for dim_item:
+  - schema:
+      fail:
+        when required column missing: [item_id, item_number, item_description]
+        when wrong column type:
+          item_id: string
+          item_number: string
+          item_description: string
+  # Check fails when item_id is not unique
+  - duplicate_count(item_id) = 0:
+      name: All item are unique
+  # Check fails when any NULL values exist in the column
+  - missing_count(item_id) = 0:
+      name: All item have a key
+  

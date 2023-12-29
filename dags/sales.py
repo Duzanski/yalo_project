@@ -7,8 +7,6 @@ from astro.constants import FileType
 from airflow.providers.google.cloud.transfers.local_to_gcs import LocalFilesystemToGCSOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyDatasetOperator
 
-import sqlalchemy
-from sqlalchemy import Float, String
 
 @dag(
     start_date=datetime(2023, 1, 1),
@@ -57,5 +55,13 @@ def sales():
         return check(scan_name, checks_subpath)
 
     check_load()
+
+    @task.external_python(python='/usr/local/airflow/soda_venv/bin/python')
+    def check_transform(scan_name='check_transform', checks_subpath='transform'):
+        from include.soda.check_function import check
+
+        return check(scan_name, checks_subpath)
+
+    check_transform()
 
 sales()

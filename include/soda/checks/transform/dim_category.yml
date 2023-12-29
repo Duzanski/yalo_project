@@ -1,0 +1,13 @@
+checks for dim_category:
+  - schema:
+      fail:
+        when required column missing: 
+          [category_id, category_number, category_name]
+        when wrong column type:
+          category_id: string
+          category_number: integer
+          category_name: string
+  - duplicate_count(category_id) = 0:
+      name: All category are unique
+  - missing_count(category_id) = 0:
+      name: All category have a key

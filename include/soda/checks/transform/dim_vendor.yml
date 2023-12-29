@@ -1,0 +1,15 @@
+checks for dim_vendor:
+  - schema:
+      fail:
+        when required column missing: [vendor_id, vendor_number, vendor_name]
+        when wrong column type:
+          vendor_id: string
+          vendor_number: integer
+          vendor_name: string
+  # Check fails when vendor_id is not unique
+  - duplicate_count(vendor_id) = 0:
+      name: All vendor_id are unique
+  # Check fails when any NULL values exist in the column
+  - missing_count(vendor_id) = 0:
+      name: All vendor_id have a key
+  

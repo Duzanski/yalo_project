@@ -1,0 +1,31 @@
+checks for fact_sales:
+  - schema:
+      fail:
+        when required column missing: 
+          ['sales_id', 'date_id', 'store_id', 'item_id', 'category_id', 'vendor_id', 'invoice_number', 'pack', 'bottle_volume_ml', 'state_bottle_cost', 'state_bottle_retail', 'bottles_sold', 'sale_dollars', 'volume_sold_liters', 'volume_sold_gallons']
+        when wrong column type:
+          sales_id: string 
+          date_id: string 
+          store_id: string 
+          item_id: string 
+          category_id: string 
+          vendor_id: string 
+          invoice_number: string
+          pack: integer
+          bottle_volume_ml: integer
+          state_bottle_cost: float64
+          state_bottle_retail: float64
+          bottles_sold: integer
+          sale_dollars: float64
+          volume_sold_liters: float64
+          volume_sold_gallons: float64
+  # Check fails when NULL values in the column
+  - missing_count(sales_id) = 0:
+      name: All sales_id have a key
+  # Check fails when the total of any sales is negative
+  - failed rows:
+      name: All sales have a positive total amount
+      fail query: |
+        SELECT invoice_number, sale_dollars
+        FROM fact_sales
+        WHERE sale_dollars < 0
