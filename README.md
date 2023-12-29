@@ -5,6 +5,7 @@ Table of Contents
  * [Project Tree](#project_tree)
  * [Task #1](#task_1)
  * [Task #2](#task_2)
+ * [Task #3](#task_3)
 
 ## Project_Tree
 ```python
@@ -111,26 +112,29 @@ LIMIT 10;
 
 ## Task_2
 
-* Please provide a data lineage of the data pipeline and design appropriate data layers
-for this case. Briefly describe what is the underlying logic of every layer and why you
-chose it.
+### Please provide a data lineage of the data pipeline and design appropriate data layers for this case. Briefly describe what is the underlying logic of every layer and why you chose it.
 
-        ➥ It's important to mention that, when data modeling, it's crucial to be closely aligned with the business team to truly understand their needs. In the context of this test, I took a broader perspective. However, in a real-world scenario, we should always focus on modeling with the aim of identifying the business processes, granularity, dimensions, and measures.
-    * To solve this task I first analysed the table an modeled the data using the start schema pattern as image below.
+* It's important to mention that, when data modeling, it's crucial to be closely aligned with the business team to truly understand their needs. In the context of this test, I took a broader perspective. However, in a real-world scenario, we should always focus on modeling with the aim of identifying the business processes, granularity, dimensions, and measures.
+
+### To solve this task I first analysed the table an modeled the data using the start schema pattern as image below.
 ![Alt text](image.png)
-    * Afterward, I created a project using Dbt, employed SODA for data validation, utilized Airflow, and integrated Google BigQuery as the data warehouse for working on the data pipeline.
-     
-        ➜ sdsdsda
-    ![Alt text](image-1.png)
-    * Below you can find the grid of the DAG
-    ![Alt text](image-2.png)
-    * As a result, you can find the analytics tables under the following path.
-        ```python
-        📦.dbt
-        ┣ 📂models
-        ┃ ┣ 📂reports
-        ┃ ┃ ┣ 📜report_category_more_revenue copy.sql
-        ┃ ┃ ┗ 📜report_stores_more_revenue.sql
-        ```
 
-  
+ ### Afterward, I created a project using Dbt, employed SODA for data validation, utilized Airflow, and integrated Google BigQuery as the data warehouse for working on the data pipeline.
+![Alt text](image-1.png)
+
+### Below you can find the grid of the DAG
+![Alt text](image-2.png)
+### As a result, you can find the analytics tables under the following path.
+```python
+📦.dbt
+┣ 📂models
+┃ ┣ 📂reports
+┃ ┃ ┣ 📜report_category_more_revenue copy.sql
+┃ ┃ ┗ 📜report_stores_more_revenue.sql
+```
+
+## Task_3
+### We experienced some issues when we stored our transactional data in Kafka because we made some previous transformations and our retention policy was short. How do you fix this issue? (Please be as descriptive as you can)
+
+* First, it's important to understand that transactional data is part of the OLTP (Online Transaction Processing) layer, signifying its role in supporting core business operations. To address the issue at hand, I recommend refraining from performing any transformations before sending the data into a Kafka topic. The idea is to implement an ETL (Extract, Transform, Load) structure where raw data is first ingested into an OLAP (Online Analytical Processing) layer, and only then apply data transformation and in paralel examine the retention policy. The pipeline would be like following.
+![Alt text](image-3.png)
