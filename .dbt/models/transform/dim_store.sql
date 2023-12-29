@@ -1,5 +1,5 @@
 WITH store_cte AS (
-	SELECT 
+	SELECT DISTINCT 
 		{{ dbt_utils.generate_surrogate_key(['store_number', 'store_name', 'address', 'city', 'zip_code', 'county_number', 'county'])}} as store_id,
 		CAST(store_number as INT64) as store_number,
 		store_name,
@@ -11,7 +11,6 @@ WITH store_cte AS (
 		county
 	FROM {{ source('sales', 'raw_sales') }}
 	WHERE store_number IS NOT NULL
-	LIMIT 1000
 )
 SELECT s.*
 FROM store_cte s

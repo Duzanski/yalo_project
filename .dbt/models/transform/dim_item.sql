@@ -5,7 +5,6 @@ WITH item_cte AS (
 		item_description
 	FROM {{ source('sales', 'raw_sales') }}
 	WHERE item_number IS NOT NULL
-	LIMIT 1000
 )
 SELECT i.*
 FROM item_cte i

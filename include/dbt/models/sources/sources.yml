@@ -1,8 +1,0 @@
-version: 2
-
-sources:
-  - name: sales
-    database: yalo-409412
-
-    tables:
-      - name: raw_invoices

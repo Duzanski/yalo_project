@@ -5,7 +5,6 @@ WITH vendor_cte AS (
       	vendor_name
 	FROM {{ source('sales', 'raw_sales') }}
 	WHERE vendor_number IS NOT NULL
-	LIMIT 1000
 )
 SELECT v.*
 FROM vendor_cte v
